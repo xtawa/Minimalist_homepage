@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Rss } from 'lucide-react';
+import { Github } from 'lucide-react';
 import logo from '../logo.png';
 
 const NavItem = ({ 
@@ -58,9 +58,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
         <div className="flex items-center gap-4 text-neutral-400">
            <a href="https://github.com/xtawa" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
               <Github size={18} />
-           </a>
-           <a href="#" className="hover:text-white transition-colors hidden sm:block">
-              <Rss size={18} />
            </a>
         </div>
       </nav>
