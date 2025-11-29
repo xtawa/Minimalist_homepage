@@ -189,7 +189,7 @@ const App: React.FC = () => {
                   <a href="#" className="hover:text-neutral-300 transition-colors">Creative Commons BY-NC-SA 4.0</a>
               </div>
               <div className="text-neutral-600">
-                  2024 © {content.name}
+                  Homepage © {content.name}
               </div>
           </footer>
         </main>
