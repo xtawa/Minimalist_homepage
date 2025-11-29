@@ -86,18 +86,35 @@ To populate the "Photos" tab:
 
 ## ❓ Troubleshooting / 故障排除
 
+### Build Error: `npm error ERESOLVE` (Dependency Conflict)
+If you see an error like `ERESOLVE could not resolve` or `Conflicting peer dependency: typescript@4.9.5`:
+如果你看到 `ERESOLVE could not resolve` 或依赖冲突错误：
+
+**Solution / 解决方法:**
+This happens because `react-scripts` v5 requires TypeScript 4.x, but newer projects default to 5.x.
+Ensure your `package.json` has compatible versions:
+这是因为 `react-scripts` v5 需要 TypeScript 4.x。请确保你的 `package.json` 版本兼容：
+```json
+"dependencies": {
+  "react": "^18.3.1",
+  "react-dom": "^18.3.1",
+  "react-scripts": "^5.0.1"
+},
+"devDependencies": {
+  "typescript": "^4.9.5"
+}
+```
+Or run install with the legacy flag:
+或者使用 legacy 标志安装：
+```bash
+npm install --legacy-peer-deps
+```
+
 ### Build Error: `react-scripts: command not found`
-If you see this error during deployment on Vercel:
+If you see this error during deployment:
 如果部署时看到此错误：
 ```
 sh: line 1: react-scripts: command not found
-Error: Command "npm run build" exited with 127
 ```
 **Solution / 解决方法:**
-It means `react-scripts` is missing from your dependencies. Run:
-这意味着你的依赖中缺少了 `react-scripts`。请运行：
-```bash
-npm install react-scripts --save
-```
-Or manually add it to `package.json` under `dependencies`.
-或者手动将其添加到 `package.json` 的 `dependencies` 字段下。
+Run / 运行: `npm install react-scripts --save`
