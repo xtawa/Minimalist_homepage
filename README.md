@@ -81,3 +81,23 @@ To populate the "Photos" tab:
    ```bash
    npm start
    ```
+
+---
+
+## ❓ Troubleshooting / 故障排除
+
+### Build Error: `react-scripts: command not found`
+If you see this error during deployment on Vercel:
+如果部署时看到此错误：
+```
+sh: line 1: react-scripts: command not found
+Error: Command "npm run build" exited with 127
+```
+**Solution / 解决方法:**
+It means `react-scripts` is missing from your dependencies. Run:
+这意味着你的依赖中缺少了 `react-scripts`。请运行：
+```bash
+npm install react-scripts --save
+```
+Or manually add it to `package.json` under `dependencies`.
+或者手动将其添加到 `package.json` 的 `dependencies` 字段下。

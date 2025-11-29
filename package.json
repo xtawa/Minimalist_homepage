@@ -5,6 +5,7 @@
   "dependencies": {
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-scripts": "^5.0.1",
     "lucide-react": "^0.555.0",
     "@notionhq/client": "^2.2.14"
   },
