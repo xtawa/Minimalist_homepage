@@ -19,12 +19,12 @@ To make the dynamic content work, you need to set up a Notion Database and conne
 
 ### 2. Setup the Database / 设置数据库
 1. Create a new Page in Notion and create a **Table Database** inside it (`/table`). / 在 Notion 中新建一个页面，并在其中创建一个 **表格数据库** (`/table`)。
-2. **Important**: You must configure the columns exactly as follows: / **重要**：你需要严格按照以下方式配置列：
-   - **Column 1 Name**: `Key` (Type: `Title` / 标题)
-   - **Column 2 Name**: `Value` (Type: `Text` or `Rich Text` / 文本或富文本)
+2. **Important**: You must configure the columns. / **重要**：你需要配置列。
+   - **Column 1 Name**: Can be `Title`, `Key` or `Name` (Type: `Title`) / 第一列名称可以是 Title, Key 或 Name。
+   - **Column 2 Name**: Can be `Value` or `Text` (Type: `Text`, `URL` or `Rich Text`) / 第二列名称可以是 Value 或 Text。
 3. Add the following rows to the database: / 在数据库中添加以下行：
 
-| Key (Title) | Value (Text) | Description / 说明 |
+| Key (Title) | Value | Description / 说明 |
 | :--- | :--- | :--- |
 | `name` | Your Name | Displayed in the main title. / 显示在主标题。 |
 | `headline` | Your Headline | Displayed below the title. / 显示在标题下方。 |
@@ -84,3 +84,15 @@ This project uses **Vite** for fast development and building.
    ```bash
    npm run build
    ```
+   
+## ❓ Troubleshooting / 故障排除
+
+### Error: `npm error ERESOLVE could not resolve`
+This is caused by a dependency conflict between `react-scripts` (v5) and newer versions of TypeScript. The project has been migrated to **Vite** to resolve this and improve performance.
+这是由 `react-scripts` (v5) 与较新版本的 TypeScript 之间的依赖冲突引起的。项目已迁移到 **Vite** 以解决此问题并提高性能。
+
+If you see similar errors during install, try running:
+如果安装时遇到类似错误，请尝试运行：
+```bash
+npm install --legacy-peer-deps
+```

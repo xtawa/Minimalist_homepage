@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Navbar } from './components/Navbar';
 import { Badge } from './components/Badge';
 import { SectionGroup } from './types';
@@ -45,32 +45,32 @@ const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<'home' | 'blog' | 'photos'>('home');
   const [photos, setPhotos] = useState<string[]>([]);
 
-  useEffect(() => {
-    async function fetchProfile() {
-      try {
-        console.log("Fetching profile data...");
-        const res = await fetch('/api/profile');
-        if (res.ok) {
-          const data = await res.json();
-          console.log("Received profile data:", data);
-          if (Object.keys(data).length > 0) {
-            setContent(prev => ({
-              ...prev,
-              ...data,
-            }));
-          } else {
-            console.warn("Received empty data object from API");
-          }
+  const fetchProfile = useCallback(async () => {
+    try {
+      console.log("Fetching profile data...");
+      const res = await fetch('/api/profile');
+      if (res.ok) {
+        const data = await res.json();
+        console.log("Received profile data:", data);
+        if (Object.keys(data).length > 0) {
+          setContent(prev => ({
+            ...prev,
+            ...data,
+          }));
         } else {
-          console.error("API response not ok:", res.status, res.statusText);
+          console.warn("Received empty data object from API");
         }
-      } catch (error) {
-        console.error("Failed to fetch profile content:", error);
-      } finally {
-        setIsLoading(false);
+      } else {
+        console.error("API response not ok:", res.status, res.statusText);
       }
+    } catch (error) {
+      console.error("Failed to fetch profile content:", error);
+    } finally {
+      setIsLoading(false);
     }
+  }, []);
 
+  useEffect(() => {
     async function fetchPhotos() {
         try {
             const res = await fetch('/api/photos');
@@ -85,13 +85,18 @@ const App: React.FC = () => {
 
     fetchProfile();
     fetchPhotos();
-  }, []);
+  }, [fetchProfile]);
 
   const handleNavigate = (view: string) => {
     if (view === 'home' || view === 'blog' || view === 'photos') {
       setCurrentView(view as 'home' | 'blog' | 'photos');
       if (view !== 'photos') {
           window.scrollTo(0, 0);
+      }
+      
+      // If navigating to blog, refresh data to ensure URL is up to date
+      if (view === 'blog') {
+        fetchProfile();
       }
     }
   };
@@ -200,6 +205,7 @@ const App: React.FC = () => {
             </div>
             
             <iframe 
+              key={content.blog_url}
               src={content.blog_url} 
               className="flex-1 w-full border-0 bg-neutral-900" 
               title="Blog"

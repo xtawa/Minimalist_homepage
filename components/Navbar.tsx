@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Rss, Moon } from 'lucide-react';
+import { Github, Rss } from 'lucide-react';
 import logo from '../logo.png';
 
 const NavItem = ({ 
@@ -62,9 +62,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
            <a href="#" className="hover:text-white transition-colors hidden sm:block">
               <Rss size={18} />
            </a>
-           <button className="hover:text-white transition-colors">
-              <Moon size={18} />
-           </button>
         </div>
       </nav>
     </header>
