@@ -6,6 +6,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const databaseId = process.env.NOTION_DATABASE_ID;
 
   if (!notionToken || !databaseId) {
+    console.error("Missing Notion Environment Variables");
     return res.status(500).json({ 
       error: 'Misconfigured server environment. Missing Notion secrets.' 
     });
@@ -21,13 +22,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const data: Record<string, string> = {};
 
     response.results.forEach((page: any) => {
-      // Assumes a Notion DB with columns: "Key" (Title) and "Value" (Rich Text)
-      const keyProperty = page.properties.Key;
-      const valueProperty = page.properties.Value;
+      const props = page.properties;
+      
+      // Try to find the Key property (Title type). 
+      // User's screenshot shows the column name is "Title".
+      // We check for "Title", "Key", or "Name".
+      const keyProperty = props.Title || props.Key || props.Name;
+      
+      // Try to find the Value property (Rich Text type).
+      const valueProperty = props.Value;
 
       if (keyProperty && valueProperty) {
+        // Extract text from the Title property
         const key = keyProperty.title?.[0]?.plain_text;
-        // Join all text fragments to form the full value
+        
+        // Extract text from the Rich Text property
         const value = valueProperty.rich_text?.map((t: any) => t.plain_text).join('');
         
         if (key && value) {
@@ -36,7 +45,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
     });
 
-    // Set Cache-Control to cache response for 60 seconds to avoid hitting Notion rate limits
+    console.log("Fetched Notion Data Keys:", Object.keys(data));
+
+    // Set Cache-Control to cache response for 60 seconds
     res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate');
     return res.status(200).json(data);
 

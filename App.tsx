@@ -48,15 +48,21 @@ const App: React.FC = () => {
   useEffect(() => {
     async function fetchProfile() {
       try {
+        console.log("Fetching profile data...");
         const res = await fetch('/api/profile');
         if (res.ok) {
           const data = await res.json();
+          console.log("Received profile data:", data);
           if (Object.keys(data).length > 0) {
             setContent(prev => ({
               ...prev,
               ...data,
             }));
+          } else {
+            console.warn("Received empty data object from API");
           }
+        } else {
+          console.error("API response not ok:", res.status, res.statusText);
         }
       } catch (error) {
         console.error("Failed to fetch profile content:", error);
