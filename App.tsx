@@ -19,23 +19,12 @@ interface ProfileContent {
 }
 
 const DEFAULT_CONTENT: ProfileContent = {
-  name: "Anthony Fu",
-  headline: "Hey! I'm Anthony Fu, a fanatical open sourceror and design engineer.",
+  name: "Loading...",
+  headline: "A personal homepage project made by Coisini Luo.",
   myself: `
     <p class="mb-6">
-      Dreaming up cool ideas and making them come true is where my passion lies. 
-      I am enthusiastic about building tools that help myself and others to be more productive 
-      and enjoy the process of crafting. You can find my <a href="#" class="text-white underline decoration-neutral-600 underline-offset-4 hover:decoration-white transition-all">full projects list here</a>.
-    </p>
-    <p class="mb-6">
-      I give <span class="text-white font-medium">talks</span> and write <span class="text-white font-medium">blog posts</span> about open source, coding, etc. 
-      Occasionally, I do live coding streams on <span class="text-white font-medium">YouTube</span> and <span class="text-white font-medium">哔哩哔哩</span>. 
-      I am also co-hosting a podcast <em class="text-white font-serif">No Coding Today</em> (in Mandarin), talking about various topics around programming. 
-      From time to time, I make some generative-art, interactivity experiments on <span class="text-white font-medium">100.antfu.me</span>.
-    </p>
-    <p>
-       Outside of programming, I enjoy photography and traveling. Some of my photos can be found on <a href="#" class="text-white underline decoration-neutral-600 underline-offset-4 hover:decoration-white transition-all">Instagram</a>.
-       If you happen to be in the same city I live (currently in <b>Paris</b>), maybe we can hang out and grab some coffee or beer.
+      Turning ideas into reality.
+      当你看到此行时，说明页面加载缓慢或者你的数据库配置失败.参考本项目README文件获得进一步支持。
     </p>
   `,
   blog_url: "https://blog.xtyin.com",
