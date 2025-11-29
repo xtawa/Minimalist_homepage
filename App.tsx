@@ -26,7 +26,7 @@ const DEFAULT_CONTENT: ProfileContent = {
     </p>
   `,
   blog_url: "https://blog.xtyin.com",
-  siteTitle: "Anthony Fu (Clone)"
+  siteTitle: "Personal homepage"
 };
 
 const App: React.FC = () => {
